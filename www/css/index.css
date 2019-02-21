@@ -1,0 +1,22 @@
+html, body, #map {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+a.leaflet-bar-part.leaflet-bar-part-single { 
+	background-image: url(../img/locate-2x.png);
+	background-size: 40px 40px;
+}
+
+#ldap-progress {
+	visibility: hidden;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -100px;
+	margin-top: -10px;
+	width: 200px;
+	height: 20px;
+}
