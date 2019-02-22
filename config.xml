@@ -40,5 +40,9 @@
         <preference name="BackupWebStorage" value="local" />
     </platform>
     <plugin name="cordova-plugin-dialogs" spec="^2.0.1" />
+    <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
+    <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
+        <string>To show your current position on the map.</string>
+    </edit-config>
     <engine name="ios" spec="^5.0.0" />
 </widget>
