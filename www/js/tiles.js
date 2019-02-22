@@ -1,4 +1,5 @@
-// Bash: cd img/maps; find . -name *.png -print | sed "s/^\.\//  '/" | sed "s/\.png/': true,/"
+// created by: cd img/maps; find . -name *.png -print | sed "s/^\.\//  '/" | sed "s/\.png/': true,/"
+// to re-download: for tile in $(cat www/js/tiles.js | grep "'" | sed "s/^.*'\(.*\)'.*$/\1/"); do wget -P www/img/$(dirname ${tile}) http://a.tile.openstreetmap.org/${tile}.png; done
 var tiles = {
   '15/16933/11624': true,
   '15/16933/11625': true,
