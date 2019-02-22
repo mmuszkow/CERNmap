@@ -44,5 +44,7 @@
     <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
         <string>To show your current position on the map.</string>
     </edit-config>
+    <plugin name="cz.blocshop.socketsforcordova" spec="^1.1.0" />
+    <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
     <engine name="ios" spec="^5.0.0" />
 </widget>

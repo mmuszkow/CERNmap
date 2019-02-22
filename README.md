@@ -1,3 +1,7 @@
 # CERNmap
-Map of CERN for mobile devices. Tested on iOS & Android back in 2016, should work on pretty much any mobile platform as it is based on Apache Cordova. You can find the prebuilt binaries in the build directory.
+Offline map of CERN for mobile devices. It should work on pretty much any mobile platform as it is based on Apache Cordova.
+
+![Alt text](screen0.png?raw=true "Screenshot 0")
+![Alt text](screen1.png?raw=true "Screenshot 1")
+![Alt text](screen2.png?raw=true "Screenshot 2")
 
