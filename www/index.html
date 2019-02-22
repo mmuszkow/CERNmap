@@ -21,7 +21,6 @@
         <script src="js/buildings.js"></script>
         <script src="js/users.js"></script>
         <script src="js/tiles.js"></script>
-        <script src="http://piwik.web.cern.ch/piwik.js"></script>
         <title>CERNmap</title>
     </head>
     <body>
@@ -94,14 +93,6 @@
                         }
                     }));
                 }
-                // Piwik
-                //piwik.startTracker('http://piwik.web.cern.ch/piwik.php', 2178);
-                //piwik.trackScreenView('/index.html');
-                try {
-                    var piwikTracker = Piwik.getTracker('http://piwik.web.cern.ch/piwik.php', 2178);
-                    piwikTracker.trackPageView();
-                    piwikTracker.enableLinkTracking();
-                } catch( err ) {}
             }, false);
         </script>
     </body>
