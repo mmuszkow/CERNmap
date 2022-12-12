@@ -38,10 +38,10 @@
                     var tile = view.zoom+'/'+view.tile.column+'/'+view.tile.row;
                     if(typeof(tiles[tile]) !== 'undefined')
                         return 'img/maps/'+tile+'.png';
-                    return 'http://'+view.subdomain+'.tile.osm.org/'+tile+'.png';
+                    return 'https://'+view.subdomain+'.tile.osm.org/'+tile+'.png';
                 }, {
                     subdomains: 'abc', 
-                    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+                    attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
                     minZoom: 15, maxNativeZoom: 17, maxZoom: 18,
                     detectRetina: true
                 });

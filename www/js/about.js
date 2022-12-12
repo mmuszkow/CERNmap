@@ -1,6 +1,6 @@
 function showAbout() {
     navigator.notification.confirm(
-        'Copyright (c) 2015 Maciej Muszkowski\n'
+        'Copyright (c) 2015-2022 Maciej Muszkowski\n'
         +'<mmuszkow@cern.ch>',
         function(decision) {
             switch(decision) {
