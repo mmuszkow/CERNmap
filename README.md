@@ -5,3 +5,16 @@ Offline map of CERN for mobile devices. It should work on pretty much any mobile
 ![Alt text](screen1.jpg?raw=true "Screenshot 1")
 ![Alt text](screen2.jpg?raw=true "Screenshot 2")
 
+# Building
+
+`npm install -g cordova`
+
+Android:
+Depending on your target SDK version, have either `ANDROID_HOME` or `ANDROID_SDK_ROOT` variable set.
+`cordova add platform android`
+`cordova run android`
+
+iOS:
+`cordova add platform ios`
+`cordova run ios`
+
