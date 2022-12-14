@@ -1,4 +1,4 @@
-var buildings = {
+const buildings = {
   1: [46.2322883723,6.0538033713],
   2: [46.2315601189,6.0535898449],
   3: [46.2322759228,6.0543551432],
@@ -939,7 +939,7 @@ var buildings = {
   9994: [46.1654632321,6.1074135836]
 };
 
-var services = {
+const services = {
   'Registration & Card Service': {bat: 55, phone: '+41227677676', mail: 'cern.reception@cern.ch'},
   'User\'s Office': {bat: 61, phone: '+41227676767', mail: 'Users.Office@cern.ch'},
   'Service Desk': {bat: 55, phone: '+41227677777', mail: 'service-desk@cern.ch'},
@@ -966,7 +966,7 @@ var services = {
   'Reception': {bat: 33, phone: '+41227678484', mail: 'cern.reception@cern.ch'}
 };
 
-function find_service(text, respCallback) {
+function findService(text, respCallback) {
     text = text.toLowerCase();
     var formatted = [];
     for (var name in services) {

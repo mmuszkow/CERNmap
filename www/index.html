@@ -75,13 +75,13 @@
                         if(typeof(buildings[text]) !== 'undefined')
                             callResponse([{title: text, loc: buildings[text]}]);
                         else
-                            find_service(text, callResponse);
+                            findService(text, callResponse);
                         return { abort: function() {} };
                 }}));
                 
                 // people searching - WebSQL (by name/surname prefix)
                 if(window.openDatabase) {
-                    users_db_init();
+                    initUsersDb();
                     map.addControl(new L.Control.Search({
                         markerLocation: true,
                         showPopup: true,
@@ -93,7 +93,7 @@
                             return '<a href="#">'+text+'</a>'; 
                         },
                         callData: function(text, callResponse) {
-                            find_user(text, callResponse);
+                            findUser(text, callResponse);
                             return { abort: function() {} };
                         }
                     }));

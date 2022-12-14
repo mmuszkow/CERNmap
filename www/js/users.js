@@ -1,14 +1,14 @@
 // why no online search?
 // because there is no official API for that
-// Android maps uses m.web.cern.ch (Sebastian'a API?)
+// Android maps uses m.web.cern.ch (Sebastian's API?)
 // also the results doesn't contain the phones prefixes
 
-var db = null;
-var is_running = false;
+var usersDb = null;
+var isLdapQueryRunning = false;
 
-function users_db_init() {
-    db = openDatabase('xldap', '1.0', 'Offline CERN contacts storage', 10*1024*1024);
-    db.transaction(function(t) {
+function initUsersDb() {
+    usersDb = openDatabase('xldap', '1.0', 'Offline CERN contacts storage', 10*1024*1024);
+    usersDb.transaction(function(t) {
         t.executeSql('CREATE TABLE IF NOT EXISTS users (givenName,surname,mail,office,department,phone,mobile)');
     });
 }
@@ -24,24 +24,24 @@ function sanitize(val) {
         .replace(/>/g, '&gt;');
 }
 
-function download_users() {
-    if(is_running)
+function downloadUsers() {
+    if(isLdapQueryRunning)
         return;
-    is_running = true;
+    isLdapQueryRunning = true;
 
-    var pbar = document.getElementById('ldap-progress');
+    const pbar = document.getElementById('ldap-progress');
     pbar.style.visibility = 'visible';
     pbar.value = 0;
 
     var xldap = new LdapClient('xldap.cern.ch', 389,
         function () { // on bind succ
-            db.transaction(function(t) { t.executeSql('DELETE FROM users'); });
+            usersDb.transaction(function(t) { t.executeSql('DELETE FROM users'); });
             xldap.search(
                 'ou=Users,ou=Organic Units,dc=cern,dc=ch',
                 [['physicalDeliveryOfficeName', '*'], ['cernAccountType', 'Primary']],
                 ['givenName', 'sn', 'mail', 'physicalDeliveryOfficeName', 'department', 'telephoneNumber', 'mobile'],
-                function(data, is_last) {
-                    db.transaction(function(t) {
+                function(data, isLast) {
+                    usersDb.transaction(function(t) {
                         for(var i=0; i<data.length; i++) {
                             var u = data[i];
                             if(typeof(u.physicalDeliveryOfficeName) !== 'undefined') {
@@ -52,12 +52,12 @@ function download_users() {
                         }
                         pbar.value += data.length;
                     });
-                    if(is_last) {
+                    if(isLast) {
                         localStorage.users_list = 'present';
                         xldap.unbind();
                         alert('Synchronizing CERN personnel done');
                         pbar.style.visibility = 'hidden';
-                        is_running = false;
+                        isLdapQueryRunning = false;
                     }
                 }
             );
@@ -72,15 +72,15 @@ function download_users() {
             errMsg = 'Error occured, the CERN personnel list will be incomplete. ' + errMsg;
             alert(errMsg);
             pbar.style.visibility = 'hidden';
-            is_running = false;
+            isLdapQueryRunning = false;
             localStorage.users_list = 'error';
         }
     );
 };
 
-function find_user(text, respCallback) {
+function findUser(text, respCallback) {
     if(localStorage.users_list === 'present') {
-        db.readTransaction(function(t) {
+        usersDb.readTransaction(function(t) {
             t.executeSql(
                 'SELECT givenName,surname,mail,office,department,phone,mobile FROM users WHERE surname LIKE ? OR givenName LIKE ? LIMIT 5', 
                 [text+'%',text+'%'], function(t, r) {

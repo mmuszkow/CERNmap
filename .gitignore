@@ -3,3 +3,5 @@ platforms/*
 plugins/*
 package.json
 package-lock.json
+.idea/*
+

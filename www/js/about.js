@@ -4,7 +4,7 @@ function showAbout() {
         +'<mmuszkow@cern.ch>',
         function(decision) {
             switch(decision) {
-                case 1: download_users(); break;
+                case 1: downloadUsers(); break;
                 case 2: alert(
                     '=== Cordova (https://cordova.apache.org) ===\n'
                     +'Licensed to the Apache Software Foundation (ASF) under one '

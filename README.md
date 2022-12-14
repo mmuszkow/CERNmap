@@ -9,12 +9,15 @@ Offline map of CERN for mobile devices. It should work on pretty much any mobile
 
 `npm install -g cordova`
 
-Android:
+## Android
 Depending on your target SDK version, have either `ANDROID_HOME` or `ANDROID_SDK_ROOT` variable set.
-`cordova add platform android`
-`cordova run android`
+```
+cordova add platform android`
+cordova run android
+```
 
-iOS:
-`cordova add platform ios`
-`cordova run ios`
-
+## iOS
+```
+cordova add platform ios
+cordova run ios
+```
