@@ -11,7 +11,6 @@
         <link rel="stylesheet" href="css/index.css" />
         <script src="cordova.js"></script>
         <script src="js/leaflet.js"></script>
-        <script src="js/leaflet.functionaltilelayer.js"></script>
         <script src="js/L.Control.Locate.min.js"></script>
         <script src="js/leaflet-search.min.js" ></script>
         <script src="js/asn1.js"></script>
@@ -30,28 +29,34 @@
             document.addEventListener('deviceready', function() {
                 // use native notifications
                 window.alert = function (message) {
-                    navigator.notification.alert(''+message, null, 'CERNmap', 'OK');
-                };
+                    navigator.notification.alert(''+message, null, 'CERNmap', 'OK')
+                }
+
                 // prepare map
                 // we use mixed approach - offline + online if offline tile not available
-                var osm = new L.TileLayer.Functional(function (view) {
-                    var tile = view.zoom+'/'+view.tile.column+'/'+view.tile.row;
-                    if(typeof(tiles[tile]) !== 'undefined')
-                        return 'img/maps/'+tile+'.png';
-                    return 'https://'+view.subdomain+'.tile.osm.org/'+tile+'.png';
-                }, {
-                    subdomains: 'abc', 
-                    attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
-                    minZoom: 15, maxNativeZoom: 17, maxZoom: 18,
-                    detectRetina: true
-                });
-                var map = L.map('map', {
-                    center: [46.232538545, 6.0450078857], zoom: 16,
-                    layers: [osm]
-                });
-                map.attributionControl.setPrefix('<b><a href="#" onclick="showAbout();">About</a></b>');
+                L.TileLayer.OSM = L.TileLayer.extend({
+                    options: {
+                        subdomains: 'abc', 
+                        attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
+                        minZoom: 15, maxNativeZoom: 17, maxZoom: 18,
+                        detectRetina: true
+                    },
+                    getTileUrl: function(coords) {
+                        const tile = this._getZoomForUrl()+'/'+coords.x+'/'+coords.y
+                        return (typeof(tiles[tile]) !== 'undefined') ? 
+                            'img/maps/'+tile+'.png' :
+                            'https://'+this._getSubdomain(coords)+'.tile.openstreetmap.org/'+tile+'.png'
+                    }
+                })
+                L.tileLayer.osm = function() { return new L.TileLayer.OSM() }
+
+                const map = L.map('map').setView([46.232538545, 6.0450078857], 16)
+                map.attributionControl.setPrefix('<b><a href="#" onclick="showAbout();">About</a></b>')
+                L.tileLayer.osm().addTo(map)
+                
                 // location
-                L.control.locate({keepCurrentZoomLevel: true, stopFollowingOnDrag: true}).addTo(map);
+                L.control.locate({keepCurrentZoomLevel: true, stopFollowingOnDrag: true}).addTo(map)
+                
                 // buildings searching - hash map
                 var markerWithPopupIcon = L.icon({
                     iconUrl: 'img/marker-info-icon.png',
@@ -74,6 +79,7 @@
                             find_service(text, callResponse);
                         return { abort: function() {} };
                 }}));
+                
                 // people searching - WebSQL (by name/surname prefix)
                 if(window.openDatabase) {
                     users_db_init();
