@@ -5,11 +5,6 @@ html, body, #map {
 	height: 100%;
 }
 
-a.leaflet-bar-part.leaflet-bar-part-single { 
-	background-image: url(../img/locate-2x.png);
-	background-size: 40px 40px;
-}
-
 #ldap-progress {
 	visibility: hidden;
 	position: absolute;

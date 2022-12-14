@@ -132,7 +132,7 @@ function showAbout() {
                     +'Application icon ("CERN" text added, iOS version stretched)\n'
                     +'By: Paomedia\n'
                     +'https://www.iconfinder.com/iconsets/small-n-flat\n\n'
-                    +'Search, info & locate icons\n'
+                    +'Search, info icons\n'
                     +'By: Google\n'
                     +'https://www.iconfinder.com/iconsets/google-material-design-icons\n\n'
                     +'Building icon\n'
