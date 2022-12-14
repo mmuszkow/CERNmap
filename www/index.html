@@ -29,7 +29,7 @@
             document.addEventListener('deviceready', function() {
                 // use native notifications
                 window.alert = function (message) {
-                    navigator.notification.alert(''+message, null, 'CERNmap', 'OK')
+                    navigator.notification.alert(''+message, null, 'CERNmap', 'OK');
                 }
 
                 // prepare map
@@ -45,15 +45,15 @@
                         const tile = this._getZoomForUrl()+'/'+coords.x+'/'+coords.y
                         return offlineTiles.has(tile) ? 'img/maps/'+tile+'.png' : 'https://'+this._getSubdomain(coords)+'.tile.openstreetmap.org/'+tile+'.png'
                     }
-                })
-                L.tileLayer.osm = function() { return new L.TileLayer.OSM() }
+                });
+                L.tileLayer.osm = function() { return new L.TileLayer.OSM(); }
 
-                const map = L.map('map').setView([46.232538545, 6.0450078857], 16)
-                map.attributionControl.setPrefix('<b><a href="#" onclick="showAbout();">About</a></b>')
-                L.tileLayer.osm().addTo(map)
+                const map = L.map('map').setView([46.232538545, 6.0450078857], 16);
+                map.attributionControl.setPrefix('<b><a href="#" onclick="showAbout();">About</a></b>');
+                L.tileLayer.osm().addTo(map);
                 
                 // location
-                L.control.locate({keepCurrentZoomLevel: true, stopFollowingOnDrag: true}).addTo(map)
+                L.control.locate({keepCurrentZoomLevel: true, stopFollowingOnDrag: true}).addTo(map);
                 
                 // buildings searching - hash map
                 var markerWithPopupIcon = L.icon({
