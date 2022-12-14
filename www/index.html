@@ -43,9 +43,7 @@
                     },
                     getTileUrl: function(coords) {
                         const tile = this._getZoomForUrl()+'/'+coords.x+'/'+coords.y
-                        return (typeof(tiles[tile]) !== 'undefined') ? 
-                            'img/maps/'+tile+'.png' :
-                            'https://'+this._getSubdomain(coords)+'.tile.openstreetmap.org/'+tile+'.png'
+                        return offlineTiles.has(tile) ? 'img/maps/'+tile+'.png' : 'https://'+this._getSubdomain(coords)+'.tile.openstreetmap.org/'+tile+'.png'
                     }
                 })
                 L.tileLayer.osm = function() { return new L.TileLayer.OSM() }
